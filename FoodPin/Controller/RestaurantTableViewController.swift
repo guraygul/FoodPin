@@ -9,10 +9,6 @@ import UIKit
 
 class RestaurantTableViewController: UITableViewController {
     
-    enum Section {
-        case all
-    }
-    
     var restaurants:[Restaurant] = [
         Restaurant(name: "Cafe Deadend", type: "Coffee & Tea Shop", location:"Hong Kong", image: "cafedeadend", isFavorite: false),
         Restaurant(name: "Homei", type: "Cafe", location: "Hong Kong", image:"homei", isFavorite: false),
@@ -41,6 +37,8 @@ class RestaurantTableViewController: UITableViewController {
     
     lazy var dataSource = configureDataSource()
     
+    // MARK: - View controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +52,8 @@ class RestaurantTableViewController: UITableViewController {
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }
+    
+    // MARK: - UITableViewDelegate Protocol
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Create an option menu as an action sheet
@@ -105,14 +105,13 @@ class RestaurantTableViewController: UITableViewController {
         
     }
     
-    //Mark as favorite action
+    // MARK: - UITableView Diffable Data Source
     
-    
-    func configureDataSource() -> UITableViewDiffableDataSource<Section, Restaurant> {
+    func configureDataSource() -> RestaurantDiffableDataSource {
         
         let cellIdentifier = "favoritecell"
         
-        let dataSource = UITableViewDiffableDataSource<Section, Restaurant>(
+        let dataSource = RestaurantDiffableDataSource(
             tableView: tableView,
             cellProvider: {  tableView, indexPath, restaurant in
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
