@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1011F2F52B35B2A300B06B91 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011F2F42B35B2A300B06B91 /* Restaurant.swift */; };
 		10A900002B31CB9000CC7910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */; };
 		10A900032B31CB9000CC7910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A900012B31CB9000CC7910 /* LaunchScreen.storyboard */; };
 		10A9000B2B31CD1500CC7910 /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9000A2B31CD1500CC7910 /* RestaurantTableViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1011F2F42B35B2A300B06B91 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		10A900022B31CB9000CC7910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		10A900042B31CB9000CC7910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10A9000A2B31CD1500CC7910 /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				10A900012B31CB9000CC7910 /* LaunchScreen.storyboard */,
 				10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */,
 				10A900042B31CB9000CC7910 /* Info.plist */,
+				1011F2F42B35B2A300B06B91 /* Restaurant.swift */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1011F2F52B35B2A300B06B91 /* Restaurant.swift in Sources */,
 				10A9000D2B31D7D600CC7910 /* RestaurantTableViewCell.swift in Sources */,
 				10A9FFF72B31CB8F00CC7910 /* AppDelegate.swift in Sources */,
 				10A9FFF92B31CB8F00CC7910 /* SceneDelegate.swift in Sources */,
