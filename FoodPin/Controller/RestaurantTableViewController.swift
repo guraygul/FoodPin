@@ -33,8 +33,6 @@ class RestaurantTableViewController: UITableViewController {
         Restaurant(name: "CASK Pub and Kitchen", type: "Thai", location: "London", image: "cask", isFavorite: false)
     ]
     
-    var restaurantIsFavorites = Array(repeating: false, count: 21)
-    
     lazy var dataSource = configureDataSource()
     
     // MARK: - View controller life cycle
@@ -53,11 +51,37 @@ class RestaurantTableViewController: UITableViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
+    // MARK: - UITableView Diffable Data Source
+    
+    func configureDataSource() -> RestaurantDiffableDataSource {
+        
+        let cellIdentifier = "favoritecell"
+        
+        let dataSource = RestaurantDiffableDataSource(
+            tableView: tableView,
+            cellProvider: {  tableView, indexPath, restaurant in
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
+                
+                cell.nameLabel.text = restaurant.name
+                cell.thumbnailImageView.image = UIImage(named: restaurant.image)
+                cell.locationLabel.text = restaurant.location
+                cell.typeLabel.text = restaurant.type
+                cell.favoriteImageView.isHidden = restaurant.isFavorite ? false : true
+                
+                return cell
+            }
+        )
+        
+        return dataSource
+    }
+    
     // MARK: - UITableViewDelegate Protocol
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         // Create an option menu as an action sheet
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
+        
         if let popoverController = optionMenu.popoverPresentationController {
             if let cell = tableView.cellForRow(at: indexPath) {
                 popoverController.sourceView = cell
@@ -71,16 +95,24 @@ class RestaurantTableViewController: UITableViewController {
         
         // Add "Reserve a table" action
         let reserveActionHandler = { (action:UIAlertAction!) -> Void in
+            
             let alertMessage = UIAlertController(title: "Not available yet",
                                                  message: "Sorry, this feature is not available yet. Please retry later.",
                                                  preferredStyle: .alert)
             
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alertMessage.addAction(UIAlertAction(title: "OK",
+                                                 style: .default,
+                                                 handler: nil))
+            
             self.present(alertMessage, animated: true, completion: nil)
         }
         
-        let reserveAction = UIAlertAction(title: "Reserve a table", style: .default, handler: reserveActionHandler)
+        let reserveAction = UIAlertAction(title: "Reserve a table",
+                                          style: .default,
+                                          handler: reserveActionHandler)
         optionMenu.addAction(reserveAction)
+        
+        // Mark as favorite action
         
         let favoriteActionTitle = self.restaurants[indexPath.row].isFavorite ? "Remove from favorite" : "Mark as favorite"
         
@@ -101,12 +133,14 @@ class RestaurantTableViewController: UITableViewController {
         // Displat the menu
         present(optionMenu, animated: true, completion: nil)
         
+        // Deselect the row
         tableView.deselectRow(at: indexPath, animated: false)
         
     }
-    // MARK: - Swipe Actions
+    // MARK: - Trailing Swipe Actions
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         // Get the selected restaurant
         guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
             return UISwipeActionsConfiguration()
@@ -114,6 +148,7 @@ class RestaurantTableViewController: UITableViewController {
         
         // Delete action
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+            
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteItems([restaurant])
             self.dataSource.apply(snapshot, animatingDifferences: true)
@@ -157,27 +192,30 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    // MARK: - UITableView Diffable Data Source
-    
-    func configureDataSource() -> RestaurantDiffableDataSource {
+    // MARK: - Leading Swipe Actions
+    override func tableView(_ tableView: UITableView,
+                            leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let cellIdentifier = "favoritecell"
+        // Heart action
+        let favoriteAction = UIContextualAction(style: .destructive, title: "") { (action, sourceView, completionHandler) in
+            
+            let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            
+            cell.favoriteImageView.isHidden = self.restaurants[indexPath.row].isFavorite
+            
+            self.restaurants[indexPath.row].isFavorite.toggle()
+            
+            // Call completion handler to dismiss the action button
+            completionHandler(true)
+        }
         
-        let dataSource = RestaurantDiffableDataSource(
-            tableView: tableView,
-            cellProvider: {  tableView, indexPath, restaurant in
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
-                
-                cell.nameLabel.text = restaurant.name
-                cell.thumbnailImageView.image = UIImage(named: restaurant.image)
-                cell.locationLabel.text = restaurant.location
-                cell.typeLabel.text = restaurant.type
-                cell.favoriteImageView.isHidden = restaurant.isFavorite ? false : true
-                
-                return cell
-            }
-        )
+        favoriteAction.backgroundColor = UIColor.systemYellow
+        favoriteAction.image = UIImage(systemName: self.restaurants[indexPath.row].isFavorite ? "heart.slash.fill" : "heart.fill")
         
-        return dataSource
+        // Configure both actions as swipe action
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [favoriteAction])
+        
+        return swipeConfiguration
+        
     }
 }
