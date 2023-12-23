@@ -56,7 +56,7 @@ class RestaurantTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate Protocol
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Create an option menu as an action sheet
+        // Create an option menu as an action sheet
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
         if let popoverController = optionMenu.popoverPresentationController {
             if let cell = tableView.cellForRow(at: indexPath) {
@@ -65,11 +65,11 @@ class RestaurantTableViewController: UITableViewController {
             }
         }
         
-        //Add actions to menu
+        // Add actions to menu
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         optionMenu.addAction(cancelAction)
         
-        //Add "Reserve a table" action
+        // Add "Reserve a table" action
         let reserveActionHandler = { (action:UIAlertAction!) -> Void in
             let alertMessage = UIAlertController(title: "Not available yet",
                                                  message: "Sorry, this feature is not available yet. Please retry later.",
@@ -87,7 +87,7 @@ class RestaurantTableViewController: UITableViewController {
         let favoriteAction = UIAlertAction(title: favoriteActionTitle,
                                            style: .default,
                                            handler: { (action: UIAlertAction!) -> Void in
-
+            
             
             let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
             
@@ -98,11 +98,63 @@ class RestaurantTableViewController: UITableViewController {
         optionMenu.addAction(favoriteAction)
         
         
-        //Displat the menu
+        // Displat the menu
         present(optionMenu, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: false)
         
+    }
+    // MARK: - Swipe Actions
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Get the selected restaurant
+        guard let restaurant = self.dataSource.itemIdentifier(for: indexPath) else {
+            return UISwipeActionsConfiguration()
+        }
+        
+        // Delete action
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems([restaurant])
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+            
+            // Call completion handler to dismiss the action button
+            completionHandler(true)
+        }
+        
+        // Share Action
+        let shareAction = UIContextualAction(style: .normal, title: "Share") { (action, sourceView, completionHandler) in
+            
+            let defaultText = "Just checking in at " + restaurant.name
+            let activityController: UIActivityViewController
+            
+            if let imageToShare = UIImage(named: restaurant.image) {
+                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+            } else {
+                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            }
+            
+            if let popoverController = activityController.popoverPresentationController {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
+            
+            self.present(activityController, animated: true, completion: nil)
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = UIColor.systemRed
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        shareAction.backgroundColor = UIColor.systemOrange
+        shareAction.image = UIImage(systemName: "square.and.arrow.up")
+        
+        // Configure both actions as swipe action
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        
+        return swipeConfiguration
     }
     
     // MARK: - UITableView Diffable Data Source

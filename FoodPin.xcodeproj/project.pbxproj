@@ -96,10 +96,10 @@
 		10A9FFF52B31CB8F00CC7910 /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
-				1011F2F92B35B9CC00B06B91 /* Storyboard */,
-				1011F2F82B35B9BE00B06B91 /* Controller */,
-				1011F2F72B35B9B700B06B91 /* View */,
 				1011F2F62B35B9AD00B06B91 /* Model */,
+				1011F2F72B35B9B700B06B91 /* View */,
+				1011F2F82B35B9BE00B06B91 /* Controller */,
+				1011F2F92B35B9CC00B06B91 /* Storyboard */,
 				10A9FFF62B31CB8F00CC7910 /* AppDelegate.swift */,
 				10A9FFF82B31CB8F00CC7910 /* SceneDelegate.swift */,
 				10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */,

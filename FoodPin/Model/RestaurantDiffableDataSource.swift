@@ -19,13 +19,7 @@ class RestaurantDiffableDataSource: UITableViewDiffableDataSource<Section, Resta
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexpath: IndexPath) {
         
-        if editingStyle == .delete {
-            if let restaurant = self.itemIdentifier(for: indexpath) {
-                var snapshot = self.snapshot()
-                snapshot.deleteItems([restaurant])
-                self.apply(snapshot, animatingDifferences: true)
-            }
-        }
+       
         
     }
     
