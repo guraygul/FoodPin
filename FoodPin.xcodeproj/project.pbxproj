@@ -20,6 +20,8 @@
 		10A9FFFE2B31CB8F00CC7910 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A9FFFC2B31CB8F00CC7910 /* Main.storyboard */; };
 		10E48EA22B38879600DD0BE2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E48EA02B38874C00DD0BE2 /* Nunito-Bold.ttf */; };
 		10E48EA32B38879600DD0BE2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E48EA12B38874C00DD0BE2 /* Nunito-Regular.ttf */; };
+		10E48EA52B38C20000DD0BE2 /* RestaurantDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E48EA42B38C20000DD0BE2 /* RestaurantDetailTextCell.swift */; };
+		10E48EA72B38C56400DD0BE2 /* RestaurantDetailTwoColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E48EA62B38C56400DD0BE2 /* RestaurantDetailTwoColumnCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10E48EA02B38874C00DD0BE2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		10E48EA12B38874C00DD0BE2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		10E48EA42B38C20000DD0BE2 /* RestaurantDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTextCell.swift; sourceTree = "<group>"; };
+		10E48EA62B38C56400DD0BE2 /* RestaurantDetailTwoColumnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailTwoColumnCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 			children = (
 				10A9000C2B31D7D600CC7910 /* RestaurantTableViewCell.swift */,
 				101314C22B387AF600982559 /* RestaurantDetailHeaderView.swift */,
+				10E48EA42B38C20000DD0BE2 /* RestaurantDetailTextCell.swift */,
+				10E48EA62B38C56400DD0BE2 /* RestaurantDetailTwoColumnCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,8 +216,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1011F2F52B35B2A300B06B91 /* Restaurant.swift in Sources */,
+				10E48EA52B38C20000DD0BE2 /* RestaurantDetailTextCell.swift in Sources */,
 				10A9000D2B31D7D600CC7910 /* RestaurantTableViewCell.swift in Sources */,
 				10A9FFF72B31CB8F00CC7910 /* AppDelegate.swift in Sources */,
+				10E48EA72B38C56400DD0BE2 /* RestaurantDetailTwoColumnCell.swift in Sources */,
 				10A9FFF92B31CB8F00CC7910 /* SceneDelegate.swift in Sources */,
 				1011F2FB2B35C0C500B06B91 /* RestaurantDiffableDataSource.swift in Sources */,
 				10496F792B3755A6006D55DB /* RestaurantDetailViewController.swift in Sources */,
