@@ -18,6 +18,7 @@ class RestaurantDetailViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.hidesBarsOnSwipe = false
         
         //Configure header view
         headerView.nameLabel.text = restaurant.name
@@ -29,7 +30,23 @@ class RestaurantDetailViewController: UIViewController {
         headerView.heartButton.setImage(UIImage(systemName: heartImage), for: .normal)
         
         tableView.separatorStyle = .none
+        tableView.contentInsetAdjustmentBehavior = .never
+        
+        navigationController?.hidesBarsOnSwipe = false
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }
 
 extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDelegate {
