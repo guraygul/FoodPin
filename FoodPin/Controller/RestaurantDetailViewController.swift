@@ -23,7 +23,7 @@ class RestaurantDetailViewController: UIViewController {
         //Configure header view
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
-        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.headerImageView.image = UIImage(data: restaurant.image)
         
         let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
         headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
@@ -34,6 +34,11 @@ class RestaurantDetailViewController: UIViewController {
         
         navigationController?.hidesBarsOnSwipe = false
         navigationItem.backButtonTitle = ""
+        
+        if let rating = restaurant.rating {
+            headerView.ratingImageView.image = UIImage(named: rating.image)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,6 +124,10 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
             if let rating = Restaurant.Rating(rawValue: identifier) {
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating.image)
+            }
+            
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                appDelegate.saveContext()
             }
             
             let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)

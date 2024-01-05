@@ -20,6 +20,7 @@
 		10A9FFF92B31CB8F00CC7910 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9FFF82B31CB8F00CC7910 /* SceneDelegate.swift */; };
 		10A9FFFE2B31CB8F00CC7910 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A9FFFC2B31CB8F00CC7910 /* Main.storyboard */; };
 		10BF07012B482D49005538BC /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BF07002B482D49005538BC /* NewRestaurantController.swift */; };
+		10BF07042B48642F005538BC /* FoodPin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10BF07022B48642F005538BC /* FoodPin.xcdatamodeld */; };
 		10CB2B282B47525D00F3E1F6 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CB2B272B47525D00F3E1F6 /* RoundedTextField.swift */; };
 		10E48EA22B38879600DD0BE2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E48EA02B38874C00DD0BE2 /* Nunito-Bold.ttf */; };
 		10E48EA32B38879600DD0BE2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10E48EA12B38874C00DD0BE2 /* Nunito-Regular.ttf */; };
@@ -47,6 +48,7 @@
 		10A9FFFD2B31CB8F00CC7910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10BF07002B482D49005538BC /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
+		10BF07032B48642F005538BC /* FoodPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodPin.xcdatamodel; sourceTree = "<group>"; };
 		10CB2B272B47525D00F3E1F6 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		10E48EA02B38874C00DD0BE2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		10E48EA12B38874C00DD0BE2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				10A9FFF82B31CB8F00CC7910 /* SceneDelegate.swift */,
 				10A9FFFF2B31CB9000CC7910 /* Assets.xcassets */,
 				10A900042B31CB9000CC7910 /* Info.plist */,
+				10BF07022B48642F005538BC /* FoodPin.xcdatamodeld */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				101314C32B387AF600982559 /* RestaurantDetailHeaderView.swift in Sources */,
 				10A9000B2B31CD1500CC7910 /* RestaurantTableViewController.swift in Sources */,
 				10FD1E312B47115000E8D3B2 /* MapViewController.swift in Sources */,
+				10BF07042B48642F005538BC /* FoodPin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +489,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		10BF07022B48642F005538BC /* FoodPin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				10BF07032B48642F005538BC /* FoodPin.xcdatamodel */,
+			);
+			currentVersion = 10BF07032B48642F005538BC /* FoodPin.xcdatamodel */;
+			path = FoodPin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 10A9FFEB2B31CB8F00CC7910 /* Project object */;
 }
