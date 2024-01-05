@@ -140,6 +140,29 @@ class NewRestaurantController: UITableViewController {
         }
     }
     
+    
+    
+    @IBAction func saveButtonTapped(sender: UIButton) {
+        
+        if nameTextField.text == "" || typeTextField.text == "" || addressTextField.text == "" || phoneTextField.text == "" || descriptionTextView.text == "" {
+            
+            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        print("Name: \(nameTextField.text ?? "")")
+        print("Type: \(typeTextField.text ?? "")")
+        print("Location: \(addressTextField.text ?? "")")
+        print("Phone: \(phoneTextField.text ?? "")")
+        print("Description: \(descriptionTextView.text ?? "")")
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension NewRestaurantController: UITextFieldDelegate {

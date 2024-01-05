@@ -214,6 +214,12 @@
                                 <segue destination="fpi-5g-Mhy" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="4Kg-dZ-nXE"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="fFt-T3-KEt">
+                            <color key="tintColor" name="NavigationBarTitle"/>
+                            <connections>
+                                <action selector="saveButtonTappedWithSender:" destination="W80-aV-r47" id="jKg-mI-JNC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="393" height="1200"/>
                     <connections>
