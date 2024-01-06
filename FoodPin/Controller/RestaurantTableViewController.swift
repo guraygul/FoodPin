@@ -74,6 +74,18 @@ class RestaurantTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            
+            present(walkthroughViewController, animated: true, completion: nil)
+        }
+    }
+    
     func fetchRestaurantData(searchText: String = "") {
         // Fetch data from data store
         let fetchRequest: NSFetchRequest<Restaurant> = Restaurant.fetchRequest()
