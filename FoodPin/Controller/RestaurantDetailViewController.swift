@@ -11,6 +11,7 @@ class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
+    @IBOutlet var favoriteBarButton: UIBarButtonItem!
     
     var restaurant = Restaurant()
     
@@ -25,14 +26,12 @@ class RestaurantDetailViewController: UIViewController {
         headerView.typeLabel.text = restaurant.type
         headerView.headerImageView.image = UIImage(data: restaurant.image)
         
-        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
-        headerView.heartButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
-        headerView.heartButton.setImage(UIImage(systemName: heartImage), for: .normal)
+        // Configure Favorite icon
+        configureFavoriteIcon()
         
         tableView.separatorStyle = .none
         tableView.contentInsetAdjustmentBehavior = .never
         
-        navigationController?.hidesBarsOnSwipe = false
         navigationItem.backButtonTitle = ""
         
         if let rating = restaurant.rating {
@@ -68,7 +67,8 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self),for: indexPath) as! RestaurantDetailTextCell
             
-            cell.descriptionLabel.text = restaurant.description
+            cell.descriptionLabel.text = restaurant.summary
+            cell.selectionStyle = .none
             
             return cell
             
@@ -79,6 +79,7 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
             cell.column1TextLabel.text = restaurant.location
             cell.column2TitleLabel.text = "Phone"
             cell.column2TextLabel.text = restaurant.phone
+            cell.selectionStyle = .none
             
             return cell
             
@@ -94,16 +95,17 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
         }
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        
         case "showMap":
             let destinationController = segue.destination as! MapViewController
-            
             destinationController.restaurant = restaurant
             
         case "showReview":
             let destinationController = segue.destination as! ReviewViewController
-            
             destinationController.restaurant = restaurant
             
         default: break
@@ -141,5 +143,25 @@ extension RestaurantDetailViewController: UITableViewDataSource, UITableViewDele
             
         })
     }
+ 
+    // MARK: - Favorite Function
     
+    @IBAction func saveFavorite() {
+        
+        restaurant.isFavorite.toggle()
+        
+        configureFavoriteIcon()
+        
+        // Save the change to the database
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.saveContext()
+        }
+    }
+ 
+    func configureFavoriteIcon() {
+        let heartImage = restaurant.isFavorite ? "heart.fill" : "heart"
+        let heartIconConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold)
+        favoriteBarButton.image = UIImage(systemName: heartImage, withConfiguration: heartIconConfiguration)
+        favoriteBarButton.tintColor = restaurant.isFavorite ? .systemYellow : .white
+    }
 }

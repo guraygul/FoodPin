@@ -4,6 +4,7 @@
     <accessibilityOverrides dynamicTypePreference="0"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -470,18 +471,6 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf0-mN-xc5">
-                                            <rect key="frame" x="324" y="18" width="71" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="71" id="Bl6-cO-uS3"/>
-                                                <constraint firstAttribute="height" constant="50" id="z3K-if-6rD"/>
-                                            </constraints>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                                            </buttonConfiguration>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -490,20 +479,17 @@
                                         <constraint firstItem="Val-zH-qIW" firstAttribute="leading" secondItem="Mmf-T0-MFX" secondAttribute="leading" constant="20" id="FMf-j1-1ZE"/>
                                         <constraint firstAttribute="trailing" secondItem="Val-zH-qIW" secondAttribute="trailing" constant="150" id="Ntq-7i-mGc"/>
                                         <constraint firstItem="PrV-74-mCN" firstAttribute="top" secondItem="Mmf-T0-MFX" secondAttribute="top" id="Pxf-pu-So5"/>
-                                        <constraint firstItem="Gf0-mN-xc5" firstAttribute="top" secondItem="Mmf-T0-MFX" secondAttribute="topMargin" constant="10" id="Raa-6c-XK9"/>
                                         <constraint firstItem="tdT-AR-5V3" firstAttribute="leading" secondItem="Mmf-T0-MFX" secondAttribute="leading" id="Whf-cx-uIT"/>
                                         <constraint firstAttribute="bottom" secondItem="tdT-AR-5V3" secondAttribute="bottom" id="ag1-zv-VQP"/>
                                         <constraint firstItem="Val-zH-qIW" firstAttribute="bottom" secondItem="kVB-1r-d9K" secondAttribute="bottom" id="dbN-of-REN"/>
                                         <constraint firstItem="tdT-AR-5V3" firstAttribute="top" secondItem="Mmf-T0-MFX" secondAttribute="top" id="fVL-FY-hhA"/>
                                         <constraint firstAttribute="bottom" secondItem="Val-zH-qIW" secondAttribute="bottom" constant="20" id="gMw-2r-TrS"/>
-                                        <constraint firstItem="Gf0-mN-xc5" firstAttribute="trailing" secondItem="Mmf-T0-MFX" secondAttribute="trailingMargin" constant="10" id="ooo-O8-yY1"/>
                                         <constraint firstAttribute="bottom" secondItem="PrV-74-mCN" secondAttribute="bottom" id="t0z-aJ-hIz"/>
                                         <constraint firstAttribute="trailing" secondItem="tdT-AR-5V3" secondAttribute="trailing" id="tfB-yI-VFg"/>
                                         <constraint firstItem="PrV-74-mCN" firstAttribute="leading" secondItem="Mmf-T0-MFX" secondAttribute="leading" id="u21-vj-zWg"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="headerImageView" destination="PrV-74-mCN" id="cai-3n-bZ0"/>
-                                        <outlet property="heartButton" destination="Gf0-mN-xc5" id="1Gi-Dc-X2Y"/>
                                         <outlet property="nameLabel" destination="mpP-a1-mWj" id="4yn-8X-rm5"/>
                                         <outlet property="ratingImageView" destination="kVB-1r-d9K" id="mKb-sv-lMw"/>
                                         <outlet property="typeLabel" destination="Z0a-fF-CUo" id="9yS-oP-O4I"/>
@@ -665,9 +651,17 @@
                             <constraint firstItem="XLz-yI-d3t" firstAttribute="top" secondItem="IKM-J5-YcV" secondAttribute="top" id="ncn-eE-cGW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gbA-o6-txW"/>
+                    <navigationItem key="navigationItem" id="gbA-o6-txW">
+                        <barButtonItem key="rightBarButtonItem" id="P6z-IT-BB0">
+                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <action selector="saveFavorite" destination="hfj-vf-08Z" id="woR-b2-RMJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="393" height="1200"/>
                     <connections>
+                        <outlet property="favoriteBarButton" destination="P6z-IT-BB0" id="4WC-w9-54v"/>
                         <outlet property="headerView" destination="Mmf-T0-MFX" id="Dmj-B1-BSm"/>
                         <outlet property="tableView" destination="XLz-yI-d3t" id="the-jp-4zg"/>
                     </connections>
@@ -881,10 +875,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
