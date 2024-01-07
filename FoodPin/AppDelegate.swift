@@ -13,17 +13,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let navBarAppearanca = UINavigationBarAppearance()
+        let navBarAppearance = UINavigationBarAppearance()
+        let tabBarAppearance = UITabBarAppearance()
+        
+        tabBarAppearance.configureWithDefaultBackground()
         
         var backButtonImage = UIImage(systemName: "arrow.backward", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20.0, weight: .bold))
         
         backButtonImage = backButtonImage?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0))
-        navBarAppearanca.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        navBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
         
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().standardAppearance = navBarAppearanca
-        UINavigationBar.appearance().compactAppearance = navBarAppearanca
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearanca
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().compactAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        
+        UITabBar.appearance().tintColor = UIColor(named: "NavigationBarTitle")
+        UITabBar.appearance().standardAppearance = tabBarAppearance
         
         return true
     }
