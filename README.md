@@ -6,6 +6,7 @@ Tech Stack:
 * UIKit
 * MVM
 * CoreData
+* MapKit
 * WebKit
 * SafariServices
 ***
